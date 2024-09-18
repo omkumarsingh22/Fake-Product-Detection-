@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleStorage Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>SimpleStorage Example</h1>
+
+    <p>Data in Smart Contract: <span id="contractData"></span></p>
+
+    <form id="storageForm">
+        <label for="newData">New Data:</label>
+        <input type="number" id="newData" step="1">
+        <button type="button" onclick="setData()">Set Data</button>
+    </form>
+
+    <script>
+        const contractAddress = 'YOUR_CONTRACT_ADDRESS'; // Replace with your actual contract address
+        const contractAbi = [ /* Add your contract ABI here */ ];
+        let web3;
+        let contractInstance;
+
+        async function initWeb3() {
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+            } else if (window.web3) {
+                web3 = new Web3(web3.currentProvider);
+            } else {
+                alert('You have to install MetaMask!');
+            }
+        }
+
+        async function initContract() {
+            contractInstance = new web3.eth.Contract(contractAbi, contractAddress);
+        }
+
+        async function getData() {
+            return contractInstance.methods.data().call();
+        }
+
+        async function setData() {
+            const newData = document.getElementById('newData').value;
+            await contractInstance.methods.setData(newData).send({ from: web3.eth.defaultAccount });
+            updateContractData();
+        }
+
+        async function updateContractData() {
+            const currentData = await getData();
+            document.getElementById('contractData').innerText = currentData;
+        }
+
+        async function init() {
+            await initWeb3();
+            await initContract();
+            await updateContractData();
+        }
+
+        init();
+    </script>
+</body>
+</html>

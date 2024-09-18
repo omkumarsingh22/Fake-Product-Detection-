@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manufacturer</title> <!-- Corrected title -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #qr-code {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Product Details Here</h1>
+  <input type="text" id="input-text" placeholder="Enter Product details">
+  <button onclick="generateQR()">Generate QR Code</button>
+  <div id="qr-code"></div>
+
+  <script src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example"></script>
+  <script>
+    function generateQR() {
+      var inputText = document.getElementById('input-text').value.trim();
+      if (inputText === '') {
+        alert('Please enter some text or URL.');
+        return;
+      }
+
+      var qrCodeDiv = document.getElementById('qr-code');
+      qrCodeDiv.innerHTML = '';
+
+      var typeNumber = 4; 
+      var errorCorrectionLevel = 'L'; 
+      var qr = qrcode(typeNumber, errorCorrectionLevel);
+      qr.addData(inputText);
+      qr.make();
+
+      var qrCodeImage = qr.createImgTag();
+      qrCodeDiv.innerHTML = qrCodeImage;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(240, 240, 112);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .he{
+            text-align:center;
+            font-size: 5vw;
+        }
+        .log{
+            display: flex;
+            justify-content: center;
+        }
+        .im{
+            border-radius: 3vw;
+        }
+        .img:hover{
+            height: 17vw;
+            width: 17vw;
+        }
+        .log {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .log div {
+            text-align: center;
+        }
+
+        .im {
+            height: 15vw;
+            width: 15vw;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .im:hover {
+            transform: scale(1.1);
+        }
+
+        p {
+            margin-left: 2vw;
+        }
+    </style>
+</head>
+<body>
+    <p class="he">Fake Product Detction using Blockchain</p>
+    <div class="log">
+        <div><a href="login.html"><img class="im" src="fact.jpg"  ></a><br><p style="margin-left: 1vw;">Login As Manufacturar</p></div>
+        <div><a href="suplier.html"><img src="sup.png" class="im" ></a><br><p style="margin-left: 3vw;">Login AsSupplier</p></div>
+        <div><a href="consumer.html"><img src="consumer.webp" class="im" ></a><br><p style="margin-left: 1vw;">Login As Consumer</p></div>
+    </div>
+</body>
+</html>
